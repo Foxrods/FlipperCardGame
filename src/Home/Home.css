@@ -1,0 +1,63 @@
+.App {
+    text-align: center;
+    font-family: 'Roboto';
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    padding-right: 10px;
+  }
+  
+  .App-title{
+    position: absolute;
+    bottom: 238px;
+    text-align: center;
+    font-size: 200px;
+    color: #f31515;
+    text-shadow: 10px 10px #4d4d4d;
+    font-family: Impact;
+    letter-spacing: -3px;
+    
+  }
+  .App-Container{
+    padding-top: 10px;
+    flex-direction:row;
+    background-color: #4d4d4d;
+  }
+  
+  .App-Container2{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .App-header {
+    background-color: #4d4d4d;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .App-text-1 {
+    font-size: 40px;
+    text-align: center;
+    height: 10px;
+  }
+  
+  .App-text-2 {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .App-input {
+    width: 160px;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+    color: #ff5555;
+  }
+
+  
+  
+  
+  

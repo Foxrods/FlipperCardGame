@@ -1,0 +1,29 @@
+.Mesa {
+    text-align: center;
+    font-family: 'Roboto';
+}
+
+.Mesa-header{
+    background-color: #a3a3a3;
+    min-height: 25vh;
+    font-size: 150px;
+    color: #f31515;
+    text-shadow: 8px 8px #4d4d4d;
+    font-family: Impact;
+    letter-spacing: -2px;
+    width: 100%;
+    text-align: center;
+}
+
+.Mesa-number{
+    color: #ff5555;
+}
+
+.Mesa-button{
+    padding-top: 230px;
+    text-align: center;
+}
+
+.Mesa-tag{
+    width: 50%;
+}

@@ -1,0 +1,19 @@
+.SideBar{
+    height: 100vmin;
+    width: 348px;
+    border-right: 3px solid #f31515;
+}
+.SideBarItem{
+    width: 50%;
+}
+
+.SideBarLogo{
+    text-align: center;
+    font-size: 110px;
+    color: #f31515;
+    text-shadow: 8px 8px #4d4d4d;
+    font-family: Impact;
+    letter-spacing: -2px;
+    margin-bottom: 10px;
+} 
+

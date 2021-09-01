@@ -1,0 +1,30 @@
+.PlayerCard{
+    float: left;
+    margin: 2px;
+    text-align: center;
+    background-color: #f31515;
+    height: 232px;
+    color: cornsilk;
+    font-family: 'Roboto';
+    width: 170px;
+}
+.PlayerCardName{
+    font-size: 24px;
+}
+.PlayerCardLine{
+    display: flex;
+}
+.PlayerStatus{
+    width: 33%;
+}
+
+.PlayerCardSelected{
+    border: 3px solid #4d4d4d;
+    text-align: center;
+    background-color: #f31515;
+    height: 220px;
+    color: cornsilk;
+    font-family: 'Roboto';
+    width: 170px;
+    
+}

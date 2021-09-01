@@ -1,0 +1,27 @@
+.Container{
+    width: 345px;
+    height: 240px;
+    border: 3px solid #f31515;
+    font-family: 'Roboto';
+    text-align: center;
+}
+
+.NumberBox{
+    height: 180px;
+    font-size: 170px;
+    padding-bottom: 20px;
+    color: #4d4d4d;
+}
+
+.ButtonContainer{
+    display: flex;
+}
+
+.Button{
+    width: 50%;
+    height: 40px;
+    background-color: #f31515;
+    border: 1px solid white;
+    color: white;
+    font-size: 30px;
+}
