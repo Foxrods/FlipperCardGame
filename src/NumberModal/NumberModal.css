@@ -1,0 +1,27 @@
+.ContainerModal{
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    background-color: #f31515;
+    color: white;
+    height: 318px;
+    width: 345px;
+    outline: 0;
+}
+
+.Title{
+    font-family: 'Roboto';
+    text-align: center;
+    font-size: 30px;
+}
+
+.OkButton{
+    width: 345px;
+    height: 40px;
+    background-color: #f31515;
+    color: white;
+    border: 0px;
+    font-family: 'Roboto';
+    text-align: center;
+    font-size: 22px;
+}

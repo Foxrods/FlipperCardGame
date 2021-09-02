@@ -1,13 +1,13 @@
 import './Jogo.css';
 import { useParams, Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
-import NumberPicker from '../NumberPicker/NumberPicker';
+import NumberModal from '../NumberModal/NumberModal';
 
 function Jogo(){
     return (
         <div>
             <SideBar></SideBar>
-            <NumberPicker></NumberPicker>
+            <NumberModal title="Quantas cartas?"></NumberModal>
         </div>
     );
 }
