@@ -7,7 +7,7 @@ import Jogo from "./Jogo/Jogo"
 
 const Routes = () => {
     return(
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Route exact path="/"                 component = { Home }   />
             <Route exact path="/mesa/:mesaNumber" component = { MesaDeEspera }/>
             <Route exact path="/jogo/:mesaNumber" component = { Jogo }/>

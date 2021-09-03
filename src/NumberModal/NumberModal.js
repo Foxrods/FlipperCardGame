@@ -4,23 +4,30 @@ import NumberPicker from '../NumberPicker/NumberPicker';
 import { Modal } from '@material-ui/core';
 
 function NumberModal(props){
-    let open = true;
+
+    
+    
     return(
         <Modal
-            open={open}
+            open={props.open}
             aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            >
+            aria-describedby="simple-modal-description">
+
                 <div className="ContainerModal">
                     <div className="Title">
                         {props.title}
                     </div>
                     <div>
 
-                    <NumberPicker></NumberPicker>
-                    <button className="OkButton">
+                    <NumberPicker
+                        number={props.number}
+                        handleNumberChose={props.handleNumberChose}>  
+                    </NumberPicker>
+
+                    <button className="OkButton" onClick={() => props.handleModalOpen(false)}>
                         Confirmar
                     </button>
+
                     </div>
                 </div>
         </Modal>

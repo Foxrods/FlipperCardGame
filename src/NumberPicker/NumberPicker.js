@@ -1,22 +1,20 @@
 import './NumberPicker.css';
 import React, { useState } from 'react';
 
-function NumberPicker(){
+function NumberPicker(props){
     
-    const [number, setNumber] = useState(0);
-
     function add(){
-        setNumber(number >= 8 ? number : number + 1);
+        props.handleNumberChose(props.number >= 8 ? props.number : props.number + 1);
     }
     
     function subtract(){
-        setNumber(number <= 0 ? number : number - 1);
+        props.handleNumberChose(props.number <= 0 ? props.number : props.number - 1);
     }
 
     return(
         <div className="Container">
             <div className="NumberBox">
-                {number}
+                {props.number}
             </div>
             <div className="ButtonContainer">
                 <button className="Button" onClick={() => add()}>
