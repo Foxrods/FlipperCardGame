@@ -3,6 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
 import React, { useState } from 'react';
+import Deck from '../Deck/Deck'
+
+let deck = Deck.getDeckList();
 
 function Jogo(){
     //state vars and callbacks
@@ -12,11 +15,20 @@ function Jogo(){
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(true);
     let handleQtdCartasModalOpen = e => setQtdCartasModalOpen(e);
 
+    function ExhibitCard(){
+        let cartas = [];
+        for (let i = 1; i <= cardQtd; i++) {
+            cartas.push(<div>Carta {deck[i-1]}</div>);
+        }
+        return cartas;
+    }
 
     return (
-        <div>
-            <button onClick={() => setQtdCartasModalOpen(true)}>Abrir modal</button>
+        <div className="Jogo">
             <SideBar></SideBar>
+            <div className="JogoBoard">
+                {ExhibitCard()}
+            </div>
             <NumberModal 
                 title="Quantas cartas?" 
                 number = {cardQtd}
