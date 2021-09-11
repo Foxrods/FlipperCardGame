@@ -3,5 +3,26 @@
 }
 
 .JogoBoard{
-
+    width: 74.5%;
 }
+
+.Hand{
+    position: fixed;
+    bottom: 0;
+    background-color: #f31515;
+    width: 100%;
+    padding-left: 17px;
+    height: 178px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.CardInHand{
+    float: left;
+    height: 160px;
+    margin: 5px;
+}
+
+.CardInHand:hover {
+    height: 170px;
+  }

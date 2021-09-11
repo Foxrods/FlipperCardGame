@@ -43,7 +43,7 @@ import TJ from '../assets/cards/Tiles_Jack_white.png';
 import TK from '../assets/cards/Tiles_King_white.png';
 
 
-class Deck {
+class Deck{
     static shuffleDeck(array){
         var currentIndex = array.length,  randomIndex;
         
@@ -59,7 +59,12 @@ class Deck {
     }
 
     static getDeckList(){
-        return this.shuffleDeck(["A", "B", "C", "D", "E", "F", "G", "H"]);
+        let deck = [CA, C2, C3, C4, C5, C6, C7, CQ, CJ, CK,
+                    HA, H2, H3, H4, H5, H6, H7, HQ, HJ, HK,
+                    PA, P2, P3, P4, P5, P6, P7, PQ, PJ, PK,
+                    TA, T2, T3, T4, T5, T6, T7, TQ, TJ, TK];
+
+        return this.shuffleDeck(deck);
     }
 }
 

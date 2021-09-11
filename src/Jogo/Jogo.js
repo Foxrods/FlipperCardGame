@@ -9,7 +9,7 @@ let deck = Deck.getDeckList();
 
 function Jogo(){
     //state vars and callbacks
-    const [cardQtd, setCardQtd] = useState(0);
+    const [cardQtd, setCardQtd] = useState(1);
     let handleNumberChose = e => setCardQtd(e);
 
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(true);
@@ -18,16 +18,19 @@ function Jogo(){
     function ExhibitCard(){
         let cartas = [];
         for (let i = 1; i <= cardQtd; i++) {
-            cartas.push(<div>Carta {deck[i-1]}</div>);
+            cartas.push(<img src={deck[i-1]} className="CardInHand"/>);
         }
-        return cartas;
+        if(!isQtdCartasModalOpen)
+            return cartas;
     }
 
     return (
         <div className="Jogo">
             <SideBar></SideBar>
             <div className="JogoBoard">
-                {ExhibitCard()}
+                <div className = "Hand">
+                    {ExhibitCard()}
+                </div>
             </div>
             <NumberModal 
                 title="Quantas cartas?" 

@@ -8,7 +8,7 @@ function NumberPicker(props){
     }
     
     function subtract(){
-        props.handleNumberChose(props.number <= 0 ? props.number : props.number - 1);
+        props.handleNumberChose(props.number <= 1 ? props.number : props.number - 1);
     }
 
     return(
