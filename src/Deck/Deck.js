@@ -42,6 +42,7 @@ import TQ from '../assets/cards/Tiles_Queen_white.png';
 import TJ from '../assets/cards/Tiles_Jack_white.png';
 import TK from '../assets/cards/Tiles_King_white.png';
 
+import Card from '../Card/Card';
 
 class Deck{
     static shuffleDeck(array){
@@ -59,10 +60,48 @@ class Deck{
     }
 
     static getDeckList(){
-        let deck = [CA, C2, C3, C4, C5, C6, C7, CQ, CJ, CK,
-                    HA, H2, H3, H4, H5, H6, H7, HQ, HJ, HK,
-                    PA, P2, P3, P4, P5, P6, P7, PQ, PJ, PK,
-                    TA, T2, T3, T4, T5, T6, T7, TQ, TJ, TK];
+        let deck = [
+            <Card naipe="Clovers" valor="A" valorReal="8"  image={CA}></Card>,
+            <Card naipe="Clovers" valor="2" valorReal="9"  image={C2}></Card>,
+            <Card naipe="Clovers" valor="3" valorReal="10" image={C3}></Card>,
+            <Card naipe="Clovers" valor="4" valorReal="1"  image={C4}></Card>,
+            <Card naipe="Clovers" valor="5" valorReal="2"  image={C5}></Card>,
+            <Card naipe="Clovers" valor="6" valorReal="3"  image={C6}></Card>,
+            <Card naipe="Clovers" valor="7" valorReal="4"  image={C7}></Card>,
+            <Card naipe="Clovers" valor="Q" valorReal="5"  image={CQ}></Card>,
+            <Card naipe="Clovers" valor="J" valorReal="6"  image={CJ}></Card>,
+            <Card naipe="Clovers" valor="K" valorReal="7"  image={CK}></Card>,
+            <Card naipe="Hearts"  valor="A" valorReal="8"  image={HA}></Card>,
+            <Card naipe="Hearts"  valor="2" valorReal="9"  image={H2}></Card>,
+            <Card naipe="Hearts"  valor="3" valorReal="10" image={H3}></Card>,
+            <Card naipe="Hearts"  valor="4" valorReal="1"  image={H4}></Card>,
+            <Card naipe="Hearts"  valor="5" valorReal="2"  image={H5}></Card>,
+            <Card naipe="Hearts"  valor="6" valorReal="3"  image={H6}></Card>,
+            <Card naipe="Hearts"  valor="7" valorReal="4"  image={H7}></Card>,
+            <Card naipe="Hearts"  valor="Q" valorReal="5"  image={HQ}></Card>,
+            <Card naipe="Hearts"  valor="J" valorReal="6"  image={HJ}></Card>,
+            <Card naipe="Hearts"  valor="K" valorReal="7"  image={HK}></Card>,
+            <Card naipe="Pikes"   valor="A" valorReal="8"  image={PA}></Card>,
+            <Card naipe="Pikes"   valor="2" valorReal="9"  image={P2}></Card>,
+            <Card naipe="Pikes"   valor="3" valorReal="10" image={P3}></Card>,
+            <Card naipe="Pikes"   valor="4" valorReal="1"  image={P4}></Card>,
+            <Card naipe="Pikes"   valor="5" valorReal="2"  image={P5}></Card>,
+            <Card naipe="Pikes"   valor="6" valorReal="3"  image={P6}></Card>,
+            <Card naipe="Pikes"   valor="7" valorReal="4"  image={P7}></Card>,
+            <Card naipe="Pikes"   valor="Q" valorReal="5"  image={PQ}></Card>,
+            <Card naipe="Pikes"   valor="J" valorReal="6"  image={PJ}></Card>,
+            <Card naipe="Pikes"   valor="K" valorReal="7"  image={PK}></Card>,
+            <Card naipe="Tiles"   valor="A" valorReal="8"  image={TA}></Card>,
+            <Card naipe="Tiles"   valor="2" valorReal="9"  image={T2}></Card>,
+            <Card naipe="Tiles"   valor="3" valorReal="10" image={T3}></Card>,
+            <Card naipe="Tiles"   valor="4" valorReal="1"  image={T4}></Card>,
+            <Card naipe="Tiles"   valor="5" valorReal="2"  image={T5}></Card>,
+            <Card naipe="Tiles"   valor="6" valorReal="3"  image={T6}></Card>,
+            <Card naipe="Tiles"   valor="7" valorReal="4"  image={T7}></Card>,
+            <Card naipe="Tiles"   valor="Q" valorReal="5"  image={TQ}></Card>,
+            <Card naipe="Tiles"   valor="J" valorReal="6"  image={TJ}></Card>,
+            <Card naipe="Tiles"   valor="K" valorReal="7"  image={TK}></Card>,
+        ]                   
 
         return this.shuffleDeck(deck);
     }

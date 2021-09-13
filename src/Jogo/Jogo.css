@@ -4,6 +4,7 @@
 
 .JogoBoard{
     width: 74.5%;
+    background-color: #4d4d4d;
 }
 
 .Hand{
@@ -18,11 +19,15 @@
 }
 
 .CardInHand{
+    
+}
+.CardInHand img{
     float: left;
     height: 160px;
     margin: 5px;
+    border-radius: 14px;
 }
 
-.CardInHand:hover {
+.CardInHand img:hover {
     height: 170px;
   }

@@ -18,7 +18,7 @@ function Jogo(){
     function ExhibitCard(){
         let cartas = [];
         for (let i = 1; i <= cardQtd; i++) {
-            cartas.push(<img src={deck[i-1]} className="CardInHand"/>);
+            cartas.push(<div className="CardInHand"> {deck[i-1]} </div>);
         }
         if(!isQtdCartasModalOpen)
             return cartas;
