@@ -4,13 +4,13 @@
 
 .JogoBoard{
     width: 74.5%;
-    background-color: #4d4d4d;
+    background-color: #eee;
 }
 
 .Hand{
     position: fixed;
     bottom: 0;
-    background-color: #f31515;
+    background-color: #eee;
     width: 100%;
     padding-left: 17px;
     height: 178px;
@@ -26,8 +26,109 @@
     height: 160px;
     margin: 5px;
     border-radius: 14px;
+    box-shadow: 9px 9px 15px rgb(102, 102, 102);
+    
 }
 
 .CardInHand img:hover {
     height: 170px;
   }
+
+.Manilha{
+    position:relative;
+}
+
+.Manilha img{
+    height: 180px;
+    border-radius: 14px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left:-70px;
+    margin-top: 20px;
+    
+    box-shadow: 10px 10px 18px rgb(102, 102, 102);
+}
+
+.PlayedCardsContainer {
+    width: 50%;
+    position: absolute;
+    top:33%;
+    left:43%;
+}
+
+@keyframes anim1 {
+    from {margin-top: 200px; transform: rotateZ(90deg);}
+    to {margin-top: 0px ; transform: rotateZ(26deg);}
+  }
+
+.PlayedCards{
+    
+}
+
+.PlayedCards img{
+    float: left;
+    height: 180px;
+    border-radius: 14px;
+    box-shadow: 10px 10px 18px rgb(102, 102, 102);
+    transform: rotateZ(26deg);
+    animation-name: anim1;
+    animation-duration: 1s;
+}
+
+@keyframes anim2 {
+    from {margin-top: 200px; transform: rotateZ(30deg);}
+    to {margin-top: 0px ; transform: rotateZ(160deg);}
+  }
+
+.PlayedCards2{
+    
+}
+
+.PlayedCards2 img{
+    float: left;
+    height: 180px;
+    border-radius: 14px;
+    box-shadow: -10px -10px 18px rgb(102, 102, 102);
+    transform: rotateZ(160deg);
+    animation-name: anim2;
+    animation-duration: 1s;
+}
+
+@keyframes anim3 {
+    from {margin-top: 200px; transform: rotateZ(150deg);}
+    to {margin-top: 0px ; transform: rotateZ(20deg);}
+  }
+
+.PlayedCards3{
+    
+}
+
+.PlayedCards3 img{
+    float: left;
+    height: 180px;
+    border-radius: 14px;
+    box-shadow: 10px 10px 18px rgb(102, 102, 102);
+    transform: rotateZ(20deg);
+    animation-name: anim3;
+    animation-duration: 1s;
+}
+
+@keyframes anim4 {
+    from {margin-top: 200px; transform: rotateZ(-40deg);}
+    to {margin-top: 0px ; transform: rotateZ(165deg);}
+  }
+
+.PlayedCards4{
+    
+}
+
+.PlayedCards4 img{
+    float: left;
+    height: 180px;
+    border-radius: 14px;
+    box-shadow: -10px -10px 18px rgb(102, 102, 102);
+    transform: rotateZ(165deg);
+    animation-name: anim4;
+    animation-duration: 1s;
+}

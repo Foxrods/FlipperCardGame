@@ -102,7 +102,7 @@ class Deck{
             <Card naipe="Tiles"   valor="J" valorReal="6"  image={TJ}></Card>,
             <Card naipe="Tiles"   valor="K" valorReal="7"  image={TK}></Card>,
         ]                   
-
+        
         return this.shuffleDeck(deck);
     }
 }

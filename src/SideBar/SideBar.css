@@ -1,8 +1,8 @@
 .SideBar{
     height: 100vmin;
-    width: 25.5%;
-    box-shadow: 3px 0px #f31515;
-    background-color: rgb(200,200,200);
+    width: 25.7%;
+    box-shadow: 2px 0px 35px rgb(19, 19, 19);
+    background-color: #eee;
     z-index: 1;
 }
 .SideBarItem{
