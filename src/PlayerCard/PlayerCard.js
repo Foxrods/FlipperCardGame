@@ -3,7 +3,7 @@ import './PlayerCard.css';
 
 
 function PlayerCard(props){
-    let faz = 0;
+    
     let fez = 0;
     let vida = 3;
     return(
@@ -17,7 +17,7 @@ function PlayerCard(props){
                     Vida: {vida}
                 </div>
                 <div className="PlayerStatus">
-                    Faz: {faz}
+                    Faz: {props.Faz}
                 </div>
                 <div className="PlayerStatus">
                     Fez: {fez}

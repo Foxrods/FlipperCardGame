@@ -1,3 +1,8 @@
+.All{
+    background-color: #eee;
+    height: 100vmin;
+}
+
 .Mesa {
     text-align: center;
     font-family: 'Roboto';

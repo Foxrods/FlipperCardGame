@@ -4,9 +4,6 @@ import NumberPicker from '../NumberPicker/NumberPicker';
 import { Modal } from '@material-ui/core';
 
 function NumberModal(props){
-
-    
-    
     return(
         <Modal
             open={props.open}
@@ -21,7 +18,10 @@ function NumberModal(props){
 
                     <NumberPicker
                         number={props.number}
-                        handleNumberChose={props.handleNumberChose}>  
+                        handleNumberChose={props.handleNumberChose}
+                        max={props.max}
+                        min={props.min}
+                        >  
                     </NumberPicker>
 
                     <button className="OkButton" onClick={() => props.handleModalOpen(false)}>

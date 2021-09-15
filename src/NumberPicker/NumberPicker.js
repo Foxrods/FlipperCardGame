@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 function NumberPicker(props){
     
     function add(){
-        props.handleNumberChose(props.number >= 8 ? props.number : props.number + 1);
+        props.handleNumberChose(props.number >= props.max ? props.number : props.number + 1);
     }
     
     function subtract(){
-        props.handleNumberChose(props.number <= 1 ? props.number : props.number - 1);
+        props.handleNumberChose(props.number <= props.min ? props.number : props.number - 1);
     }
 
     return(

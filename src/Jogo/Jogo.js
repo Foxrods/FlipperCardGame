@@ -15,6 +15,12 @@ function Jogo(){
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(true);
     let handleQtdCartasModalOpen = e => setQtdCartasModalOpen(e);
 
+    const [qtdFaz, setQtdFaz] = useState(0);
+    let handleQtdFazChose = e => setQtdFaz(e);
+
+    const [isQtdFazModalOpen, setQtdFazModalOpen] = useState(false);
+    let handleQtdFazModalOpen = e => setQtdFazModalOpen(e);
+
     function ExhibitCard(){
         let cartas = [];
         for (let i = 1; i <= cardQtd; i++) {
@@ -26,19 +32,21 @@ function Jogo(){
     }
 
     function ExhibitManilha(){
-        if(!isQtdCartasModalOpen)
+        if(!isQtdCartasModalOpen){
             return deck[39];
+        }
     }
 
     function PlayChosenCard(cardNumber){
-        if(!isQtdCartasModalOpen)
+        if(!isQtdCartasModalOpen && !isQtdFazModalOpen)
             return deck[cardNumber];
     }
 
     return (
         <div className="Jogo">
-            <SideBar></SideBar>
+            <SideBar Faz={qtdFaz}></SideBar>
             <div className="JogoBoard">
+                <button onClick={() => setQtdFazModalOpen(true)}>Click me</button>
                 <div className="Manilha">
                     {ExhibitManilha()}
                 </div>
@@ -66,7 +74,21 @@ function Jogo(){
                 number = {cardQtd}
                 handleNumberChose = {handleNumberChose}
                 open = {isQtdCartasModalOpen}
-                handleModalOpen = {handleQtdCartasModalOpen}>
+                handleModalOpen = {handleQtdCartasModalOpen}
+                max = {8}
+                min = {1}
+                key = "modal-qtd-cartas">
+            </NumberModal>
+
+            <NumberModal 
+                title="Quantas faz?" 
+                number = {qtdFaz}
+                handleNumberChose = {handleQtdFazChose}
+                open = {isQtdFazModalOpen}
+                handleModalOpen = {handleQtdFazModalOpen}
+                max = {10}
+                min = {0}
+                key = "modal-faz">
             </NumberModal>
         </div>
     );

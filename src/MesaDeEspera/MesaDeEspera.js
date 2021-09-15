@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 function MesaDeEspera(){
     let { mesaNumber } = useParams();
     return (
-        <div>
+        <div className="All">
             <header className="Mesa-header">
             FLIPPER
             </header>
