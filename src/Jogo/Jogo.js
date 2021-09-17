@@ -4,16 +4,19 @@ import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
 import React, { useState } from 'react';
 import Deck from '../Deck/Deck'
-
-let deck = Deck.getDeckList();
+import GameManager from '../GameManager/GameManager';
 
 function Jogo(){
     //state vars and callbacks
+    const [deck, setDeck] = useState(GameManager.getDeckList());
+
+    const [hand, setHand] = useState([]);
+
     const [cardQtd, setCardQtd] = useState(1);
     let handleNumberChose = e => setCardQtd(e);
 
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(true);
-    let handleQtdCartasModalOpen = e => setQtdCartasModalOpen(e);
+    let handleQtdCartasModalOpen = e => ExhibitCard(e);
 
     const [qtdFaz, setQtdFaz] = useState(0);
     let handleQtdFazChose = e => setQtdFaz(e);
@@ -21,14 +24,30 @@ function Jogo(){
     const [isQtdFazModalOpen, setQtdFazModalOpen] = useState(false);
     let handleQtdFazModalOpen = e => setQtdFazModalOpen(e);
 
-    function ExhibitCard(){
+    const [playedCard, setPlayedCard] = useState(<div></div>)
+
+    const [isPlayerTurn, setPlayerTurn] = useState(true);
+
+    function GiveHand(){
+        let divHand = [];
+        if(!isQtdCartasModalOpen){
+            for(let i = 0; i < cardQtd; i++){
+                divHand.push(<div key={i-1} className="CardInHand" onClick={e => PlayChosenCard(hand[i])}>{hand[i]}</div>)
+            }
+        }
+        return divHand; 
+    }
+
+    function ExhibitCard(modalOpen){
+
+        setQtdCartasModalOpen(modalOpen)
+
         let cartas = [];
         for (let i = 1; i <= cardQtd; i++) {
-            cartas.push(<div className="CardInHand"> {deck[i-1]} </div>);
+            cartas.push(deck[i-1]);
             //deck.remove(i);
         }
-        if(!isQtdCartasModalOpen)
-            return cartas;
+        setHand(cartas);
     }
 
     function ExhibitManilha(){
@@ -37,36 +56,46 @@ function Jogo(){
         }
     }
 
-    function PlayChosenCard(cardNumber){
-        if(!isQtdCartasModalOpen && !isQtdFazModalOpen)
-            return deck[cardNumber];
+    function PlayChosenCard(card){
+        if(!isQtdCartasModalOpen && !isQtdFazModalOpen && isPlayerTurn){
+            if(hand.indexOf(card) != -1){
+                hand.splice(hand.indexOf(card),1);
+                setPlayedCard(<div className="PlayedCards">{card}</div>)
+            }
+            setHand(hand);
+            skipTurn();
+            //setTimeout(skipTurn, 3000);
+        }
+    }
+
+    function skipTurn(){
+        setPlayerTurn(false);
+        //setPlayedCard(<div></div>);
     }
 
     return (
         <div className="Jogo">
             <SideBar Faz={qtdFaz}></SideBar>
             <div className="JogoBoard">
-                <button onClick={() => setQtdFazModalOpen(true)}>Click me</button>
+                <button onClick={() => setQtdFazModalOpen(true)}>Quantas Faz?</button>
                 <div className="Manilha">
                     {ExhibitManilha()}
                 </div>
                 <div className="PlayedCardsContainer">
-
-                    <div className="PlayedCards">
-                        {PlayChosenCard(38)}
-                    </div>
-                    <div className="PlayedCards2">
-                        {PlayChosenCard(37)}
+                    {playedCard}
+                    
+                    {/* <div className="PlayedCards2">
+                        {PlayChosenCard(hand[37])}
                     </div>
                     <div className="PlayedCards3">
-                        {PlayChosenCard(36)}
+                        {PlayChosenCard(hand[36])}
                     </div>
                     <div className="PlayedCards4">
-                        {PlayChosenCard(35)}
-                    </div>
+                        {PlayChosenCard(hand[35])}
+                    </div> */}
                 </div>
                 <div className="Hand">
-                    {ExhibitCard()}
+                    {GiveHand()}
                 </div>
             </div>
             <NumberModal 
