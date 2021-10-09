@@ -5,9 +5,12 @@ import logo4 from '../assets/cards/Pikes_4_white.png';
 import logo5 from '../assets/cards/Clovers_3_white.png';
 import logo6 from '../assets/cards/Hearts_Queen_white.png';
 import logo7 from '../assets/cards/Tiles_6_white.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import Session from '../Session/Session';
+import SessionService from '../Session/SessionService';
 import './Home.css';
+import { useState } from 'react';
 
 function randomNumberAsString(){
     let rand = Math.floor(Math.random() * 999999);
@@ -15,7 +18,30 @@ function randomNumberAsString(){
 }
 
 function Home() {
-  let mesaNumber = randomNumberAsString();
+    const [inputMesaNumber, setinputMesaNumber] = useState('');
+    
+    let mesaNumber = randomNumberAsString();
+
+    async function createSession(){
+        var newSession = new Session({mesaNumber});
+        await SessionService.createSessionOnFirebase(newSession);
+    }
+
+    function keyPress(e){
+        setinputMesaNumber(e.target.value);
+     }
+
+    function tryToEnterSession(){
+        if(inputMesaNumber.length == 6){
+            let sessao = SessionService.getSessionFromFirebase(inputMesaNumber);
+            if(sessao.number == inputMesaNumber){
+                console.log('redirect')
+                return <Redirect to={`/mesa/${sessao.number}`} />
+            }
+        }
+    }
+
+    
   
   return (
     <div className="App">
@@ -39,7 +65,7 @@ function Home() {
                 </p>
                 
                 <p>
-                    <Button variant="contained" component={Link} to={`/mesa/${mesaNumber}`} size="large">
+                    <Button variant="contained" component={Link} to={`/mesa/${mesaNumber}`} size="large" onClick={() => createSession()}>
                         CRIAR SALA
                     </Button>
                 </p>
@@ -47,8 +73,10 @@ function Home() {
                 <p className="App-text-2">
                     Ou entre com o código de uma sala
                 </p>
-                <input id="mesaInput" type="text" maxLength="6" className="App-input">
+                <input id="mesaInput" type="text" maxLength="6" className="App-input" onKeyDown={e => keyPress(e)}>
                 </input>
+                
+                {tryToEnterSession()}
             </div>
         </header>
     </div>

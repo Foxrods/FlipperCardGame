@@ -26,7 +26,7 @@ function Jogo(){
 
     const [playedCard, setPlayedCard] = useState(<div></div>)
 
-    const [isPlayerTurn, setPlayerTurn] = useState(true);
+    const [isPlayerTurn, setPlayerTurn] = useState(true); //fazer jogadores ser um objeto numa lista. Eles terao o atributo de ser turno deles ou nao
 
     function GiveHand(){
         let divHand = [];
@@ -38,9 +38,14 @@ function Jogo(){
         return divHand; 
     }
 
+    function ChooseQtdFazState(){
+        setQtdFazModalOpen(true);
+    }
+
     function ExhibitCard(modalOpen){
 
-        setQtdCartasModalOpen(modalOpen)
+        setQtdCartasModalOpen(modalOpen);
+        ChooseQtdFazState();
 
         let cartas = [];
         for (let i = 1; i <= cardQtd; i++) {
