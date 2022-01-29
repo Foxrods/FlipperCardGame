@@ -1,5 +1,5 @@
 import './NumberModal.css';
-import React, { useState } from 'react';
+import React from 'react';
 import NumberPicker from '../NumberPicker/NumberPicker';
 import { Modal } from '@material-ui/core';
 

@@ -13,17 +13,18 @@ import './Home.css';
 import { useState } from 'react';
 
 function randomNumberAsString(){
-    let rand = Math.floor(Math.random() * 999999);
-    return rand.toString().padStart(6, "0");
+    let rand = Math.floor(Math.random() * 99999);
+    return rand.toString().padStart(5, "0");
 }
 
 function Home() {
     const [inputMesaNumber, setinputMesaNumber] = useState('');
+    const [redirect, setRedirect] = useState(null);
     
     let mesaNumber = randomNumberAsString();
 
     async function createSession(){
-        var newSession = new Session({mesaNumber});
+        var newSession = new Session(mesaNumber);
         await SessionService.createSessionOnFirebase(newSession);
     }
 
@@ -32,13 +33,18 @@ function Home() {
      }
 
     function tryToEnterSession(){
-        if(inputMesaNumber.length == 6){
-            let sessao = SessionService.getSessionFromFirebase(inputMesaNumber);
-            if(sessao.number == inputMesaNumber){
-                console.log('redirect')
-                return <Redirect to={`/mesa/${sessao.number}`} />
-            }
+        if(inputMesaNumber.length === 5){
+            SessionService.getSessionFromFirebase(inputMesaNumber).then( x=> {
+                if(x!= null && x.number == inputMesaNumber){
+                    setRedirect(`/mesa/${x.number}`);
+                }
+            });
         }
+    }
+
+    function redirectToSession(){
+        if(redirect != null)
+            return <Redirect to={redirect} />
     }
 
     
@@ -73,10 +79,11 @@ function Home() {
                 <p className="App-text-2">
                     Ou entre com o código de uma sala
                 </p>
-                <input id="mesaInput" type="text" maxLength="6" className="App-input" onKeyDown={e => keyPress(e)}>
+                <input id="mesaInput" type="text" maxLength="5" className="App-input" onKeyDown={e => keyPress(e)}>
                 </input>
                 
                 {tryToEnterSession()}
+                {redirectToSession()}
             </div>
         </header>
     </div>
