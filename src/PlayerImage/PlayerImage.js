@@ -1,10 +1,9 @@
 import "./PlayerImage.css"
-import playerPNG from '../assets/Player.png';
 
-function PlayerImage(){
+function PlayerImage(props){
     return(
         <div>
-            <img src={playerPNG} className="Image" alt="playerImage" />
+            <img src={props.image} className="Image" alt="playerImage" />
         </div>
     );
 }

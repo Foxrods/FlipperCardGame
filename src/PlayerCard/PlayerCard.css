@@ -1,13 +1,13 @@
 .PlayerCard{
+    margin: 5px;
     float: left;
-    margin: 2px;
     text-align: center;
     background-color: #f31515;
     height: 232px;
     color: cornsilk;
     font-family: 'Roboto';
     width: 170px;
-    box-shadow: 9px 9px 15px rgb(102, 102, 102);
+    box-shadow: 2px 2px 10px rgb(31, 31, 31);
 }
 .PlayerCardName{
     font-size: 24px;

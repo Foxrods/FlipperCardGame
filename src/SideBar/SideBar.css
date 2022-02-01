@@ -1,5 +1,6 @@
 .SideBar{
-    height: 100vmin;
+    height: 100vh;
+    max-height: 100vmin;
     width: 25.7%;
     background-color: #eee;
     z-index: 1;
@@ -12,16 +13,16 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-.SideBarItem{
-    width: 50%;
-    
+
+.card{
+    display: flex;
 }
 
 .SideBarLogo{
     text-align: center;
     font-size: 110px;
     color: #f31515;
-    text-shadow: 8px 8px #4d4d4d;
+    text-shadow: 8px 8px #010101;
     font-family: Impact;
     letter-spacing: -2px;
     margin-bottom: 10px;

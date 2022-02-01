@@ -11,7 +11,7 @@ function PlayerCard(props){
             <div className="PlayerCardName">
                 {props.Playername}
             </div>
-            <PlayerImage></PlayerImage>
+            <PlayerImage image={props.image}></PlayerImage>
             <div className="PlayerCardLine">
                 <div className="PlayerStatus">
                     Vida: {vida}

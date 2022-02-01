@@ -1,7 +1,7 @@
 import Session from '../Session/Session';
 import {db} from '../utils/firebaseUtils';
-import { collection, getDocs, getDoc } from 'firebase/firestore';
-import { query, where, setDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs } from 'firebase/firestore';
+import { query, where, setDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { format } from 'date-fns';
 
 export default class SessionService{
@@ -48,5 +48,19 @@ export default class SessionService{
             return session;
         }
         else return null;
+    }
+
+    static async getSessionSnapshotFromFirebase(number, returnSession){
+        const sessionCol = collection(db, "Sessao");
+        const q = query(sessionCol, 
+            where("number", "==", number),
+            where("validDate", "==", format(new Date(), 'yyyy-MM-dd')));
+
+        onSnapshot(q, (querySnapshot) => {
+            if(querySnapshot.docs.length > 0){
+                const session = querySnapshot.docs[0].data();
+                returnSession(session);
+            }
+        });
     }
 }

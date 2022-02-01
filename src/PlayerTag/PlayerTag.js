@@ -15,7 +15,7 @@ function PlayerTag(props){
 
     return(
         <div className="Player-tag">
-            <PlayerImage>
+            <PlayerImage image={props.image}>
             </PlayerImage>
             <input placeholder="Player Name" 
                 value={playerName}

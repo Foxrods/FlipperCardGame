@@ -1,3 +1,8 @@
+import m1 from '../assets/m1.png'
+import m2 from '../assets/m2.png'
+import m3 from '../assets/m3.png'
+import m4 from '../assets/m4.png'
+
 import PlayerTag from '../PlayerTag/PlayerTag';
 import './MesaDeEspera.css';
 import { useParams, Link } from "react-router-dom";
@@ -13,7 +18,7 @@ function MesaDeEspera(){
 
     function loadPlayers(){
         if(!synced){
-            SessionService.getSessionFromFirebase(mesaNumber).then(session => {
+            SessionService.getSessionSnapshotFromFirebase(mesaNumber, (session) => {
                 setPlayers(session.players);
                 setSynced(true);
             });
@@ -33,10 +38,10 @@ function MesaDeEspera(){
                 <h1 className="Mesa-number">
                     MESA: {mesaNumber}
                 </h1>
-                <PlayerTag key={players[0]} playerName={players[0]} mesaNumber={mesaNumber}></PlayerTag>
-                <PlayerTag key={players[1]} playerName={players[1]} mesaNumber={mesaNumber}></PlayerTag>
-                <PlayerTag key={players[2]} playerName={players[2]} mesaNumber={mesaNumber}></PlayerTag>
-                <PlayerTag key={players[3]} playerName={players[3]} mesaNumber={mesaNumber}></PlayerTag>
+                <PlayerTag key={players[0]} playerName={players[0]} mesaNumber={mesaNumber} image={m1}></PlayerTag>
+                <PlayerTag key={players[1]} playerName={players[1]} mesaNumber={mesaNumber} image={m2}></PlayerTag>
+                <PlayerTag key={players[2]} playerName={players[2]} mesaNumber={mesaNumber} image={m3}></PlayerTag>
+                <PlayerTag key={players[3]} playerName={players[3]} mesaNumber={mesaNumber} image={m4}></PlayerTag>
                 
             </div>
             <p className="Mesa-button">

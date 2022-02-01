@@ -1,5 +1,7 @@
 .Jogo{
     display: flex;
+    max-height: 100vmin;
+    overflow: hidden;
 }
 
 .JogoBoard{
