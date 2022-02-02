@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+.ContainerNameModal{
+    position: absolute;
+    top: 32%;
+    left: calc(50% - 172.5px);
+    background-color: #010101;
+    color: white;
+    height: 250px;
+    width: 345px;
+    outline: 0;
+    box-shadow:  2px 9px 15px rgba(22, 22, 22, 0.4);
+}
+
+.TitleNameModal{
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 30px;
+    margin-top: 18px;
+}
+
+.inputName{
+    display: flex;
+    margin: 10px auto 30px auto;
+    width: 341px;
+    height: 108px;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 40px;
+    border: 0px;
+    outline: 0;
+    color: #f31515;
+}
+
+.footerModal{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+.CancelBtn{
+    height: 40px;
+    width: 165px;
+    margin-right: 2px;
+    margin-left: 5px;
+    border: 0px;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 18px;
+    color: cornsilk;
+    cursor: pointer;
+    padding-top: 5px;
+    background-color: #f31515;
+}
+
+.AddBtn{
+    cursor: pointer;
+    height: 40px;
+    width: 165px;
+    margin-left: 3px;
+    margin-right: 5px;
+    border: 0px;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 18px;
+    padding-top: 5px;
+    color: cornsilk;
+    background-color: #f31515;
+}

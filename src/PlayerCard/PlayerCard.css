@@ -1,18 +1,23 @@
 .PlayerCard{
     margin: 5px;
+    padding-top: 6px;
     float: left;
     text-align: center;
     background-color: #f31515;
-    height: 232px;
+    height: 228px;
     color: cornsilk;
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
     width: 170px;
     box-shadow: 2px 2px 10px rgb(31, 31, 31);
 }
 .PlayerCardName{
     font-size: 24px;
+    line-height: 30px;
 }
 .PlayerCardLine{
+    padding: 4px 0 0 4px;
+    font-size: 17px;
+    line-height: 24px;
     display: flex;
 }
 .PlayerStatus{
@@ -25,7 +30,7 @@
     background-color: #f31515;
     height: 220px;
     color: cornsilk;
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
     width: 170px;
     
 }

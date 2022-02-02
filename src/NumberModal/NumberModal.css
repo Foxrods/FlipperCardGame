@@ -10,9 +10,11 @@
 }
 
 .Title{
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
     text-align: center;
     font-size: 30px;
+    height: 32px;
+    margin-top: 8px;
 }
 
 .OkButton{
@@ -21,7 +23,9 @@
     background-color: #f31515;
     color: white;
     border: 0px;
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
     text-align: center;
     font-size: 22px;
+    padding-top: 6px;
+    cursor: pointer;
 }

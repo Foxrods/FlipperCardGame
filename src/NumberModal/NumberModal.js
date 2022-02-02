@@ -25,7 +25,7 @@ function NumberModal(props){
                     </NumberPicker>
 
                     <button className="OkButton" onClick={() => props.handleModalOpen(false)}>
-                        Confirmar
+                        CONFIRMAR
                     </button>
 
                     </div>

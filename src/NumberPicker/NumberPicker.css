@@ -1,7 +1,7 @@
 .Container{
     width: 345px;
     height: 240px;
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
     text-align: center;
     background-color: white;
     border-bottom: 1px solid white;
@@ -10,6 +10,7 @@
 .NumberBox{
     height: 180px;
     font-size: 170px;
+    line-height: 240px;
     padding-bottom: 20px;
     color: #4d4d4d;
 }
@@ -19,8 +20,21 @@
 }
 
 .Button{
+    padding-bottom: 2px;
     width: 50%;
     height: 40px;
+    background-color:rgb(163,163,163);
+    border: 1px solid white;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.Buttonplus{
+    cursor: pointer;
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
     background-color:rgb(163,163,163);
     border: 1px solid white;
     color: white;

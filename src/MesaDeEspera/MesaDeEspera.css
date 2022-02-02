@@ -5,7 +5,9 @@
 
 .Mesa {
     text-align: center;
-    font-family: 'Roboto';
+    font-family: 'Josefin Sans';
+    display: flex;
+    height: 270px;
 }
 
 .Mesa-header{
@@ -21,12 +23,28 @@
 }
 
 .Mesa-number{
+    margin-top:10px !important;
     color: #f31515;
+    margin:auto;
+    text-align: center;
+}
+
+.Mesa-button-container{
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
 }
 
 .Mesa-button{
-    padding-top: 230px;
     text-align: center;
+    background-color: #f31515 !important;
+    width: 200px;
+    height: 45px;
+    border-radius: 0 !important;
+    color: white !important;
+    font-family: 'Josefin Sans' !important;
+    padding-top: 12px !important;
+    font-size: 18px !important;
 }
 
 .Mesa-tag{

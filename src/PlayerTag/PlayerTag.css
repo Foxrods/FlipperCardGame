@@ -1,5 +1,14 @@
 .Player-tag{
-    width: 25%;
     margin: auto;
-    float: left;
+    box-shadow:  9px 9px 15px rgb(102, 102, 102);
+}
+.InputPlayerName{
+    outline: 0;
+    height: 30px;
+    width: 162px;
+    background-color: #f31515;
+    font-family: 'Josefin Sans';
+    text-align: center;
+    font-size: 22px;
+    color: white;
 }

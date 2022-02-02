@@ -17,11 +17,11 @@ function NumberPicker(props){
                 {props.number}
             </div>
             <div className="ButtonContainer">
-                <button className="Button" onClick={() => add()}>
+                <button className="Buttonplus" onClick={() => add()}>
                     +
                 </button>
                 <button className="Button" onClick={() => subtract()}>
-                    -
+                    –
                 </button>
             </div>
         </div>
