@@ -1,5 +1,5 @@
 import './NameModal.css';
-import {React, useState} from 'react';
+import { React } from 'react';
 import { Modal } from '@material-ui/core';
 
 function NameModal(props){

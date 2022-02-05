@@ -1,0 +1,31 @@
+.ContainerModalAlert{
+    position: absolute;
+    top: 32%;
+    left: calc(50% - 172.5px);
+    background-color: #010101;
+    color: cornsilk;
+    height: 200px;
+    width: 345px;
+    border: 2px solid cornsilk;
+    box-shadow:  2px 9px 15px rgba(22, 22, 22, 0.4);
+  }
+  
+  .TextModalAlert{
+    font-family: 'Josefin Sans';
+    margin-top: 50px;
+    font-size: 40px;
+    text-align: center;
+  }
+  
+  .ButtonModalAlert{
+    bottom: -25px;
+    text-align: center;
+    background-color: #f31515 !important;
+    width: 345px;
+    height: 45px;
+    border-radius: 0 !important;
+    color: white !important;
+    font-family: 'Josefin Sans' !important;
+    padding-top: 12px !important;
+    font-size: 18px !important;
+  }

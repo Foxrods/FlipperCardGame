@@ -1,9 +1,7 @@
 import './Jogo.css';
-import { useParams, Link } from "react-router-dom";
 import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
 import React, { useState } from 'react';
-import Deck from '../Deck/Deck'
 import GameManager from '../GameManager/GameManager';
 
 function Jogo(){
@@ -63,7 +61,7 @@ function Jogo(){
 
     function PlayChosenCard(card){
         if(!isQtdCartasModalOpen && !isQtdFazModalOpen && isPlayerTurn){
-            if(hand.indexOf(card) != -1){
+            if(hand.indexOf(card) !== -1){
                 hand.splice(hand.indexOf(card),1);
                 setPlayedCard(<div className="PlayedCards">{card}</div>)
             }

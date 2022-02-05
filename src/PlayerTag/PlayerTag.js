@@ -1,6 +1,5 @@
 import "./PlayerTag.css"
 import PlayerImage from "../PlayerImage/PlayerImage";
-import SessionService from '../Session/SessionService';
 import { useState } from 'react';
 
 

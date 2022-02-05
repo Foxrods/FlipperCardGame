@@ -1,4 +1,3 @@
-import Session from '../Session/Session';
 import {db} from '../utils/firebaseUtils';
 import { collection, getDocs } from 'firebase/firestore';
 import { query, where, setDoc, doc, updateDoc, onSnapshot } from "firebase/firestore";
@@ -12,7 +11,8 @@ export default class SessionService{
         await setDoc(doc(sessionCol), {
             number: session.number, 
             players: session.players,
-            validDate: session.validDate
+            validDate: session.validDate,
+            gameIniciated: false
         });
     }
 
@@ -20,8 +20,9 @@ export default class SessionService{
 
         const sessionCol = collection(db, "Sessao");
         const q = query(sessionCol, 
+            where("gameIniciated", "==", false),
             where("number", "==", sessionNumber),
-            where("validDate", "==", format(new Date(), 'yyyy-MM-dd')));
+            where("validDate", "==", format(new Date(), 'yyyy-MM-dd')),);
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((x) => {
@@ -41,6 +42,7 @@ export default class SessionService{
         const sessionCol = collection(db, "Sessao");
         const q = query(sessionCol, 
             where("number", "==", number),
+            where("gameIniciated", "==", false),
             where("validDate", "==", format(new Date(), 'yyyy-MM-dd')));
         const querySnapshot = await getDocs(q);
         if(querySnapshot.docs.length > 0){
@@ -61,6 +63,23 @@ export default class SessionService{
                 const session = querySnapshot.docs[0].data();
                 returnSession(session);
             }
+        });
+    }
+
+    static async iniciateGameSession(number){
+        const sessionCol = collection(db, "Sessao");
+        const q = query(sessionCol, 
+            where("number", "==", number),
+            where("gameIniciated", "==", false),
+            where("validDate", "==", format(new Date(), 'yyyy-MM-dd')),);
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((x) => {
+            const docRef = doc(db, "Sessao", x.id);
+            updateDoc(docRef, {
+                gameIniciated: true
+            });
+
         });
     }
 }

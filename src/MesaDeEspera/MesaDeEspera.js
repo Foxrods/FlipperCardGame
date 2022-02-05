@@ -3,13 +3,14 @@ import m2 from '../assets/m2.png'
 import m3 from '../assets/m3.png'
 import m4 from '../assets/m4.png'
 
-import PlayerTag from '../PlayerTag/PlayerTag';
 import './MesaDeEspera.css';
-import { useParams, Link } from "react-router-dom";
-import { Button } from '@material-ui/core';
-import SessionService from '../Session/SessionService';
-import { useState, useEffect } from 'react';
 import NameModal from '../NameModal/NameModal';
+import PlayerTag from '../PlayerTag/PlayerTag';
+import SessionService from '../Session/SessionService';
+import AlertModal from '../AlertModal/AlertModal';
+import { useParams, Redirect } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
 
 function MesaDeEspera(){
     let { mesaNumber } = useParams();
@@ -18,12 +19,14 @@ function MesaDeEspera(){
     const [synced, setSynced] = useState(false);
     const [nameModalOpened, setNameModalOpened] = useState(true);
     const [thisPlayerName, setThisPlayerName] = useState("");
+    const [redirect, setRedirect] = useState(false);
 
     function loadPlayers(){
         if(!synced){
             SessionService.getSessionSnapshotFromFirebase(mesaNumber, (session) => {
-                setPlayers(session.players);
                 setSynced(true);
+                setPlayers(session.players);
+                setRedirect(session.gameIniciated);
             });
         }
     }
@@ -35,19 +38,43 @@ function MesaDeEspera(){
         }
     }
 
+    function redirectToGameSession(){
+        if(checkIfPlayerIsInTableBeforeRedirect())
+            return <Redirect to={`/jogo/${mesaNumber}`}></Redirect>
+    }
+
+    function returnToHome(){
+        return window.location.href='/FlipperCardGame';
+    }
+
+    function checkIfPlayerIsInTableBeforeRedirect(){
+        return redirect && players.find(x => x === thisPlayerName);
+    }
+
     useEffect(() => {
-        loadPlayers()
+        let mounted = true;
+        if(mounted){
+            loadPlayers();
+        }
+        return function cleanup() {
+            mounted = false;
+        }
     });
 
     return (
         <div className="All">
             <NameModal
-                open={nameModalOpened}
+                open={nameModalOpened && !redirect}
                 name={thisPlayerName}
                 setName={name => setThisPlayerName(name)}
                 closeModalAndAddPlayer={() => closeModalAndAddPlayer()}
             >
             </NameModal>
+            <AlertModal 
+                open={redirect} 
+                alertText={'O jogo iniciou sem você...'} 
+                buttonAction={() => returnToHome()}>
+            </AlertModal>
             <header className="Mesa-header">
                 FLIPPER
             </header>
@@ -62,10 +89,13 @@ function MesaDeEspera(){
                 
             </div>
             <p className='Mesa-button-container'>
-                <Button className="Mesa-button" variant="contained" component={Link} to={`/jogo/${mesaNumber}`} size="large">
+                <Button className="Mesa-button" variant="contained" size="large" onClick={() => SessionService.iniciateGameSession(mesaNumber)}>
                     Iniciar
                 </Button>
             </p>
+
+            {loadPlayers()}
+            {redirectToGameSession()}
         </div>
     );
 }
