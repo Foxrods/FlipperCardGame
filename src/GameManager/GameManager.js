@@ -1,22 +1,19 @@
 import Deck from '../Deck/Deck'
+import DeckService from '../Deck/DeckService';
 
 export default class GameManager{
-    // constructor(){
-    //     this.deck = Deck.getDeckList();
-    //     this.manilha = this.deck[39];
-    //     this.hand1 = []
-    //     this.hand2 = []
-    //     this.hand3 = []
-    //     this.hand4 = []
-    // }
-    
+
+    static deckSeed = 0;
+      
     static getDeckList(){
-        return Deck.getDeckList();
-    }
-
-    static getPlayerCard(qtdCards){
-
-    }
-
-    
+        if(this.deckSeed == 0){
+            
+            DeckService.getDeckSeed().then(seed =>{
+                this.deckSeed = seed;
+                }
+            );
+        }
+        
+        return Deck.getDeckList(this.deckSeed);
+    }   
 }

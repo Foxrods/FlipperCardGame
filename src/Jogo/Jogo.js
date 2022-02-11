@@ -1,13 +1,12 @@
 import './Jogo.css';
 import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import GameManager from '../GameManager/GameManager';
 
 function Jogo(){
     //state vars and callbacks
     const [deck, setDeck] = useState(GameManager.getDeckList());
-
     const [hand, setHand] = useState([]);
 
     const [cardQtd, setCardQtd] = useState(1);

@@ -45,21 +45,27 @@ import TK from '../assets/cards/Tiles_King_white.png';
 import Card from '../Card/Card';
 
 class Deck{
-    static shuffleDeck(array){
+    static shuffleDeck(array, seed){
         var currentIndex = array.length,  randomIndex;
         
         while (currentIndex != 0) {
             
-            randomIndex = Math.floor(Math.random() * currentIndex);
+            randomIndex = Math.floor(this.random(seed) * currentIndex);
             currentIndex--;
             
             [array[currentIndex], array[randomIndex]] = [
                 array[randomIndex], array[currentIndex]];
+            ++seed;   
         }
         return array;
     }
 
-    static getDeckList(){
+    static random(seed) {
+        var x = Math.sin(seed++) * 10000; 
+        return x - Math.floor(x);
+    }
+
+    static getDeckList(seed = 0){
         let deck = [
             <Card naipe="Clovers" valor="A" valorReal="8"  image={CA}></Card>,
             <Card naipe="Clovers" valor="2" valorReal="9"  image={C2}></Card>,
@@ -103,7 +109,7 @@ class Deck{
             <Card naipe="Tiles"   valor="K" valorReal="7"  image={TK}></Card>,
         ]                   
         
-        return this.shuffleDeck(deck);
+        return this.shuffleDeck(deck, seed);
     }
 }
 

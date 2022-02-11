@@ -4,10 +4,12 @@ import m3 from '../assets/m3.png'
 import m4 from '../assets/m4.png'
 
 import './MesaDeEspera.css';
+import DeckService from '../Deck/DeckService';
 import NameModal from '../NameModal/NameModal';
 import PlayerTag from '../PlayerTag/PlayerTag';
-import SessionService from '../Session/SessionService';
 import AlertModal from '../AlertModal/AlertModal';
+import SessionService from '../Session/SessionService';
+import PlayerSessionService from '../Session/PlayerSessionService';
 import { useParams, Redirect } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
@@ -33,6 +35,7 @@ function MesaDeEspera(){
 
     function closeModalAndAddPlayer(){
         if(thisPlayerName !== ""){
+            localStorage.setItem('PlayerName', thisPlayerName);
             SessionService.addPlayerToSessionOnFirebase(mesaNumber, thisPlayerName);
             setNameModalOpened(false);
         }
@@ -49,6 +52,18 @@ function MesaDeEspera(){
 
     function checkIfPlayerIsInTableBeforeRedirect(){
         return redirect && players.find(x => x === thisPlayerName);
+    }
+
+    function InitiateGameSession(){
+        players.forEach(player => PlayerSessionService.createNewPlayerSessionForPlayer(mesaNumber, player, isFirstPlayer(player)))
+        
+        if(isFirstPlayer(thisPlayerName)) DeckService.createOrUpdateDeck(mesaNumber);
+
+        SessionService.iniciateGameSession(mesaNumber);
+    }
+
+    function isFirstPlayer(playerName){
+        return players.findIndex(x => x == playerName) == 0;
     }
 
     useEffect(() => {
@@ -89,7 +104,7 @@ function MesaDeEspera(){
                 
             </div>
             <p className='Mesa-button-container'>
-                <Button className="Mesa-button" variant="contained" size="large" onClick={() => SessionService.iniciateGameSession(mesaNumber)}>
+                <Button className="Mesa-button" variant="contained" size="large" onClick={() => InitiateGameSession()}>
                     Iniciar
                 </Button>
             </p>
