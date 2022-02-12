@@ -1,11 +1,14 @@
 import './Jogo.css';
 import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
-import React, { useState, useEffect  } from 'react';
+import React, { useState  } from 'react';
+import { useParams } from "react-router-dom";
 import GameManager from '../GameManager/GameManager';
 
 function Jogo(){
     //state vars and callbacks
+    let { mesaNumber } = useParams();
+
     const [deck, setDeck] = useState(GameManager.getDeckList());
     const [hand, setHand] = useState([]);
 
@@ -77,7 +80,7 @@ function Jogo(){
 
     return (
         <div className="Jogo">
-            <SideBar Faz={qtdFaz}></SideBar>
+            <SideBar mesaNumber={mesaNumber}></SideBar>
             <div className="JogoBoard">
                 <button onClick={() => setQtdFazModalOpen(true)}>Quantas Faz?</button>
                 <div className="Manilha">

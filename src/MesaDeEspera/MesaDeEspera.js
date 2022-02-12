@@ -104,7 +104,7 @@ function MesaDeEspera(){
                 
             </div>
             <p className='Mesa-button-container'>
-                <Button className="Mesa-button" variant="contained" size="large" onClick={() => InitiateGameSession()}>
+                <Button className="Mesa-button" variant="contained" size="large" onClick={() => InitiateGameSession()} disabled={players.length < 2}>
                     Iniciar
                 </Button>
             </p>

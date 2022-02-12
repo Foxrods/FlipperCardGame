@@ -3,9 +3,6 @@ import './PlayerCard.css';
 
 
 function PlayerCard(props){
-    
-    let fez = 0;
-    let vida = 3;
     return(
         <div className="PlayerCard">
             <div className="PlayerCardName">
@@ -14,13 +11,13 @@ function PlayerCard(props){
             <PlayerImage image={props.image}></PlayerImage>
             <div className="PlayerCardLine">
                 <div className="PlayerStatus">
-                    Vida: {vida}
+                    Vida: {props.Vida}
                 </div>
                 <div className="PlayerStatus">
                     Faz: {props.Faz}
                 </div>
                 <div className="PlayerStatus">
-                    Fez: {fez}
+                    Fez: {props.Fez}
                 </div>
             </div>
         </div>

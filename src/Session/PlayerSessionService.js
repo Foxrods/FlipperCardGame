@@ -19,4 +19,18 @@ export default class PlayerSessionService{
             cartas: []
         });
     }
+
+    static async getPlayersInsideSession(number, returnPlayers){
+        const sessionCol = collection(db, "SessaoDoJogador");
+        const q = query(sessionCol, 
+            where("mesa", "==", number),
+            where("validDate", "==", format(new Date(), 'yyyy-MM-dd')));
+
+        onSnapshot(q, (querySnapshot) => {
+            if(querySnapshot.docs.length > 0){
+                let players = querySnapshot.docs.map(x => x.data());
+                returnPlayers(players);
+            }
+        });
+    }
 }
