@@ -10,6 +10,7 @@ import PlayerTag from '../PlayerTag/PlayerTag';
 import AlertModal from '../AlertModal/AlertModal';
 import SessionService from '../Session/SessionService';
 import PlayerSessionService from '../Session/PlayerSessionService';
+import JogoService from '../Jogo/JogoService';
 import { useParams, Redirect } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
@@ -55,9 +56,10 @@ function MesaDeEspera(){
     }
 
     function InitiateGameSession(){
-        players.forEach(player => PlayerSessionService.createNewPlayerSessionForPlayer(mesaNumber, player, isFirstPlayer(player)))
+        players.forEach(player => PlayerSessionService.createNewPlayerSessionForPlayer(mesaNumber, player, isFirstPlayer(player), players.indexOf(player)))
         
-        if(isFirstPlayer(thisPlayerName)) DeckService.createOrUpdateDeck(mesaNumber);
+        JogoService.createJogoOnFirebase(mesaNumber)
+        DeckService.createOrUpdateDeck(mesaNumber);
 
         SessionService.iniciateGameSession(mesaNumber);
     }

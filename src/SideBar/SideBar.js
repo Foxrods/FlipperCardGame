@@ -4,23 +4,11 @@ import m3 from '../assets/m3.png'
 import m4 from '../assets/m4.png'
 
 import PlayerCard from '../PlayerCard/PlayerCard';
-import PlayerSessionService from '../Session/PlayerSessionService';
-import { useState } from 'react';
 import './SideBar.css';
 
 function SideBar(props){
-    const [players, setPlayers] = useState([]);
-    const [synced, setSynced] = useState(false);
+    let players = props.players;
     const images = [m1,m2,m3,m4];
-
-    function loadPlayers(){
-        if(!synced){
-            PlayerSessionService.getPlayersInsideSession(props.mesaNumber, (players) => {
-                setSynced(true);
-                setPlayers(players);
-            });
-        }
-    }
 
     function getNthPlayer(index){
         if(players !== undefined && players.length > index){
@@ -46,7 +34,6 @@ function SideBar(props){
                     {getNthPlayer(3)}
                 </div>
             </div>
-            {loadPlayers()}
         </div>
     );
 }
