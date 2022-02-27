@@ -59,7 +59,7 @@ function MesaDeEspera(){
         players.forEach(player => PlayerSessionService.createNewPlayerSessionForPlayer(mesaNumber, player, isFirstPlayer(player), players.indexOf(player)))
         
         JogoService.createJogoOnFirebase(mesaNumber)
-        DeckService.createOrUpdateDeck(mesaNumber);
+        //DeckService.createOrUpdateDeck(mesaNumber);
 
         SessionService.iniciateGameSession(mesaNumber);
     }

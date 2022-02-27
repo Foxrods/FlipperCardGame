@@ -15,14 +15,13 @@ export default class DeckService{
         });
     }
 
-    static async getDeckSeed(){
+    static async getDeckSeed(callback){
         const sessionCol = collection(db, "Deck");
         const q = query(sessionCol);
         const querySnapshot = await getDocs(q);
         if(querySnapshot.docs.length > 0){
             const deck = querySnapshot.docs[0].data();
-            return deck.deckSeed;
+            callback(deck);
         }
-        else return null;
     }
 }

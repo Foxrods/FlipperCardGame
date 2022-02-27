@@ -2,8 +2,13 @@ import './NumberModal.css';
 import React from 'react';
 import NumberPicker from '../NumberPicker/NumberPicker';
 import { Modal } from '@material-ui/core';
+import { useState  } from 'react'
 
 function NumberModal(props){
+
+    const [number, setNumber] = useState(props.min);
+    let handleNumberChose = e => setNumber(e);
+
     return(
         <Modal
             open={props.open}
@@ -17,14 +22,14 @@ function NumberModal(props){
                     <div>
 
                     <NumberPicker
-                        number={props.number}
-                        handleNumberChose={props.handleNumberChose}
+                        number={number}
+                        handleNumberChose={handleNumberChose}
                         max={props.max}
                         min={props.min}
                         >  
                     </NumberPicker>
 
-                    <button className="OkButton" onClick={() => props.handleModalOpen(false)}>
+                    <button className="OkButton" onClick={() => props.handleModalOpen(false, number)}>
                         CONFIRMAR
                     </button>
 

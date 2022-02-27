@@ -3,43 +3,39 @@ import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
 import React, { useState, useEffect  } from 'react';
 import { useParams } from "react-router-dom";
-import GameManager from '../GameManager/GameManager';
+import DeckService from '../Deck/DeckService';
 import PlayerSessionService from '../Session/PlayerSessionService';
 import JogoService from './JogoService';
+import Deck from '../Deck/Deck'
 
 function Jogo(){
     //state vars and callbacks
     let { mesaNumber } = useParams();
+    const [deckSeed, setDeckSeed] = useState(mesaNumber);
     let thisPlayerPosition = 0;
     let thisPlayer = null;
     const [jogo, setJogo] = useState();
     const [players, setPlayers] = useState([]);
     const [synced, setSynced] = useState(false);
-    const [deck, setDeck] = useState(GameManager.getDeckList());
+    const [deck, setDeck] = useState(Deck.getDeckList(deckSeed));
     const [hand, setHand] = useState([]);
 
-    const [cardQtd, setCardQtd] = useState(0);
-    let handleNumberChose = e => setCardQtd(e);
-
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(false);
-    let handleQtdCartasModalOpen = e => {
+    let handleQtdCartasModalOpen = (closeModal, chosenNumber) => {
         let innerJogo = jogo;
-        jogo.cardQtdInThisTurn = cardQtd;
+        innerJogo.cardQtdInThisTurn = chosenNumber;
         setJogo(innerJogo);
-        JogoService.updateJogo(jogo)
-        ExhibitCard(e, cardQtd);
+        JogoService.updateJogo(jogo);
+        ExhibitCard(closeModal, chosenNumber);
     }
 
-    const [qtdFaz, setQtdFaz] = useState(0);
-    let handleQtdFazChose = e => setQtdFaz(e);
-
     const [isQtdFazModalOpen, setQtdFazModalOpen] = useState(false);
-    let handleQtdFazModalOpen = e => {
-        // thisPlayer = players.find(x => x.playerName === localStorage.getItem('PlayerName'));
-        // thisPlayer.faz = qtdFaz;
-        // PlayerSessionService.updatePlayerSession(thisPlayer);
-        
-        setQtdFazModalOpen(e);
+    let handleQtdFazModalOpen = (closeModal, chosenNumber) => {
+        let innerPlayer = players.find(x => x.playerName === localStorage.getItem('PlayerName'));
+        innerPlayer.faz = chosenNumber;
+        innerPlayer.isReady = true;
+        PlayerSessionService.updatePlayerSession(innerPlayer);
+        setQtdFazModalOpen(closeModal);
     }
 
     const [playedCard, setPlayedCard] = useState(<div></div>)
@@ -59,11 +55,10 @@ function Jogo(){
         if(!synced){
             PlayerSessionService.getPlayersInsideSession(mesaNumber, (players) => {
                 thisPlayer = players.find(x => x.playerName === localStorage.getItem('PlayerName'));
-                console.log(thisPlayer)
                 thisPlayerPosition = players.indexOf(thisPlayer);
-                setSynced(true);
                 setPlayers(players);
-                setQtdCartasModalOpen(thisPlayer.isCurrentPlayer);
+                setQtdCartasModalOpen(thisPlayer.isCurrentPlayer && !thisPlayer.isReady);
+                setSynced(true);
             });
         }
     }
@@ -71,17 +66,17 @@ function Jogo(){
     function loadJogo(){
         JogoService.getJogoSnapshotFromFirebase(mesaNumber, (jogo) => {
             setJogo(jogo);
-            setCardQtd(jogo.cardQtdInThisTurn);
             if(jogo.cardQtdInThisTurn > 0){
                 ExhibitCard(false, jogo.cardQtdInThisTurn);
             }
         });
+        
     }
     
     function GiveHand(){
         let divHand = [];
-        if(!isQtdCartasModalOpen){
-            for(let i = 0; i < cardQtd; i++){
+        if(!isQtdCartasModalOpen && jogo != null){
+            for(let i = 0; i < jogo.cardQtdInThisTurn; i++){
                 divHand.push(<div key={i-1} className="CardInHand" onClick={e => PlayChosenCard(hand[i])}>{hand[i]}</div>)
             }
         }
@@ -99,14 +94,15 @@ function Jogo(){
         let cartas = [];
         for (let i = thisPlayerPosition * qtd; i < thisPlayerPosition * qtd + qtd; i++) {
             cartas.push(deck[i]);
+            console.log(cartas)
         }
         
         setHand(cartas);
     }
 
     function ExhibitManilha(){
-        if(!isQtdCartasModalOpen){
-            return deck[39];
+        if(deck[38]){
+            return deck[38];
         }
     }
 
@@ -153,8 +149,6 @@ function Jogo(){
             </div>
             <NumberModal 
                 title="Quantas cartas?" 
-                number = {cardQtd}
-                handleNumberChose = {handleNumberChose}
                 open = {isQtdCartasModalOpen}
                 handleModalOpen = {handleQtdCartasModalOpen}
                 max = {8}
@@ -164,8 +158,6 @@ function Jogo(){
 
             <NumberModal 
                 title="Quantas faz?" 
-                number = {qtdFaz}
-                handleNumberChose = {handleQtdFazChose}
                 open = {isQtdFazModalOpen}
                 handleModalOpen = {handleQtdFazModalOpen}
                 max = {10}

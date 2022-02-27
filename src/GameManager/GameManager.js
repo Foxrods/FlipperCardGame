@@ -13,11 +13,4 @@ export default class GameManager{
         
         return Deck.getDeckList(this.deckSeed);
     }
-    
-    static getPlayersInSession(mesaNumber){
-        
-        PlayerSessionService.getPlayersInsideSession(mesaNumber).then(x => this.players = x);
-        
-        return this.players;
-    }
 }
