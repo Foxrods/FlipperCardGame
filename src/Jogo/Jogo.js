@@ -3,13 +3,13 @@ import SideBar from '../SideBar/SideBar';
 import NumberModal from '../NumberModal/NumberModal';
 import React, { useState, useEffect  } from 'react';
 import { useParams } from "react-router-dom";
-import DeckService from '../Deck/DeckService';
+import ReactDOMServer from 'react-dom/server';
 import PlayerSessionService from '../Session/PlayerSessionService';
 import JogoService from './JogoService';
 import Deck from '../Deck/Deck'
 
 function Jogo(){
-    //state vars and callbacks
+    
     let { mesaNumber } = useParams();
     const [deckSeed, setDeckSeed] = useState(mesaNumber);
     let thisPlayerPosition = 0;
@@ -19,6 +19,7 @@ function Jogo(){
     const [synced, setSynced] = useState(false);
     const [deck, setDeck] = useState(Deck.getDeckList(deckSeed));
     const [hand, setHand] = useState([]);
+    const [totalCardsPlayed, setTotalCardsPlayed] = useState(0);
 
     const [isQtdCartasModalOpen, setQtdCartasModalOpen] = useState(false);
     let handleQtdCartasModalOpen = (closeModal, chosenNumber) => {
@@ -27,6 +28,7 @@ function Jogo(){
         setJogo(innerJogo);
         JogoService.updateJogo(jogo);
         ExhibitCard(closeModal, chosenNumber);
+        if(!closeModal) setQtdFazModalOpen(true);
     }
 
     const [isQtdFazModalOpen, setQtdFazModalOpen] = useState(false);
@@ -37,10 +39,6 @@ function Jogo(){
         PlayerSessionService.updatePlayerSession(innerPlayer);
         setQtdFazModalOpen(closeModal);
     }
-
-    const [playedCard, setPlayedCard] = useState(<div></div>)
-
-    const [isPlayerTurn, setPlayerTurn] = useState(true); //fazer jogadores ser um objeto numa lista. Eles terao o atributo de ser turno deles ou nao
 
     useEffect(() => {
         loadJogo();
@@ -58,6 +56,7 @@ function Jogo(){
                 thisPlayerPosition = players.indexOf(thisPlayer);
                 setPlayers(players);
                 setQtdCartasModalOpen(thisPlayer.isCurrentPlayer && !thisPlayer.isReady);
+                setQtdFazModalOpen(!thisPlayer.isCurrentPlayer && !thisPlayer.isReady);
                 setSynced(true);
             });
         }
@@ -66,7 +65,7 @@ function Jogo(){
     function loadJogo(){
         JogoService.getJogoSnapshotFromFirebase(mesaNumber, (jogo) => {
             setJogo(jogo);
-            if(jogo.cardQtdInThisTurn > 0){
+            if(jogo.cardQtdInThisTurn > 0 && !(jogo.cardsInTable[0])){
                 ExhibitCard(false, jogo.cardQtdInThisTurn);
             }
         });
@@ -75,28 +74,20 @@ function Jogo(){
     
     function GiveHand(){
         let divHand = [];
-        if(!isQtdCartasModalOpen && jogo != null){
-            for(let i = 0; i < jogo.cardQtdInThisTurn; i++){
+        if(!isQtdCartasModalOpen && hand.length > 0){
+            for(let i = 0; i < hand.length; i++){
                 divHand.push(<div key={i-1} className="CardInHand" onClick={e => PlayChosenCard(hand[i])}>{hand[i]}</div>)
             }
         }
         return divHand; 
     }
 
-    function ChooseQtdFazState(){
-        setQtdFazModalOpen(true);
-    }
-
     function ExhibitCard(modalOpen, qtd){
-        
         setQtdCartasModalOpen(modalOpen);
-        ChooseQtdFazState();
         let cartas = [];
         for (let i = thisPlayerPosition * qtd; i < thisPlayerPosition * qtd + qtd; i++) {
             cartas.push(deck[i]);
-            console.log(cartas)
         }
-        
         setHand(cartas);
     }
 
@@ -107,20 +98,42 @@ function Jogo(){
     }
 
     function PlayChosenCard(card){
-        if(!isQtdCartasModalOpen && !isQtdFazModalOpen && isPlayerTurn){
+        if(!isQtdCartasModalOpen && !isQtdFazModalOpen){
             if(hand.indexOf(card) !== -1){
                 hand.splice(hand.indexOf(card),1);
-                setPlayedCard(<div className="PlayedCards">{card}</div>)
+                updateCardsInTable(card);
             }
             setHand(hand);
-            skipTurn();
-            //setTimeout(skipTurn, 3000);
+            setTotalCardsPlayed(totalCardsPlayed + 1);
+            console.log(totalCardsPlayed)
         }
     }
 
-    function skipTurn(){
-        setPlayerTurn(false);
-        //setPlayedCard(<div></div>);
+    function updateCardsInTable(card){
+        let strCard = ReactDOMServer.renderToStaticMarkup(card);
+        let innerJogo = jogo;
+        innerJogo.cardsInTable.push(strCard);
+        JogoService.updateJogo(innerJogo);
+    }
+
+    function getPlayedCard1(){
+        if(jogo?.cardsInTable[0])
+            return <div className="PlayedCards" dangerouslySetInnerHTML={{__html: jogo.cardsInTable[0]}}></div>
+    }
+
+    function getPlayedCard2(){
+        if(jogo?.cardsInTable[1])
+            return <div className="PlayedCards2" dangerouslySetInnerHTML={{__html: jogo.cardsInTable[1]}}></div>
+    }
+
+    function getPlayedCard3(){
+        if(jogo?.cardsInTable[2])
+            return <div className="PlayedCards3" dangerouslySetInnerHTML={{__html: jogo.cardsInTable[2]}}></div>
+    }
+
+    function getPlayedCard4(){
+        if(jogo?.cardsInTable[3])
+            return <div className="PlayedCards4" dangerouslySetInnerHTML={{__html: jogo.cardsInTable[3]}}></div>
     }
 
     return (
@@ -131,17 +144,10 @@ function Jogo(){
                     {ExhibitManilha()}
                 </div>
                 <div className="PlayedCardsContainer">
-                    {playedCard}
-                    
-                    {/* <div className="PlayedCards2">
-                        {PlayChosenCard(hand[37])}
-                    </div>
-                    <div className="PlayedCards3">
-                        {PlayChosenCard(hand[36])}
-                    </div>
-                    <div className="PlayedCards4">
-                        {PlayChosenCard(hand[35])}
-                    </div> */}
+                    {getPlayedCard1()}
+                    {getPlayedCard2()}
+                    {getPlayedCard3()}
+                    {getPlayedCard4()}
                 </div>
                 <div className="Hand">
                     {GiveHand()}

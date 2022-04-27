@@ -57,11 +57,8 @@ function MesaDeEspera(){
 
     function InitiateGameSession(){
         players.forEach(player => PlayerSessionService.createNewPlayerSessionForPlayer(mesaNumber, player, isFirstPlayer(player), players.indexOf(player)))
-        
         JogoService.createJogoOnFirebase(mesaNumber)
-        //DeckService.createOrUpdateDeck(mesaNumber);
-
-        SessionService.iniciateGameSession(mesaNumber);
+        setTimeout(() => SessionService.iniciateGameSession(mesaNumber), 2000);
     }
 
     function isFirstPlayer(playerName){

@@ -65,6 +65,10 @@ class Deck{
         return x - Math.floor(x);
     }
 
+    static getJSXCardElement(naipe, valor, valorReal, image){
+        return <Card naipe={naipe} valor={valor} valorReal={valorReal}  image={image}></Card>
+    } 
+
     static getDeckList(seed = 0){
         let deck = [
             <Card naipe="Clovers" valor="A" valorReal="8"  image={CA}></Card>,
